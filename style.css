@@ -1,30 +1,240 @@
-/* Import Tailwind CSS base styles, components, and utilities */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+/* --- Base & Fonts --- */
+:root {
+    --font-body: 'Inter', sans-serif;
+    --font-title: 'Playfair Display', serif;
+    
+    --color-bg: #f8f7f2;
+    --color-text: #3a3a3a;
+    --color-primary: #d4af37; /* Gold accent */
+    --color-secondary: #6b7280;
+    --color-card-bg: rgba(255, 255, 255, 0.85);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
 
-/* Custom styles for the application */
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
-.title-font {
-    font-family: 'Playfair Display', serif;
+/* --- Background Shapes --- */
+.background-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
-/* Custom animation for fade-in effect */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    filter: blur(80px);
+}
+
+.shape1 {
+    width: 400px;
+    height: 400px;
+    background: #fde68a; /* Soft yellow */
+    top: -100px;
+    left: -100px;
+    animation: move1 20s infinite alternate ease-in-out;
+}
+
+.shape2 {
+    width: 500px;
+    height: 500px;
+    background: #a7f3d0; /* Soft mint */
+    bottom: -150px;
+    right: -150px;
+    animation: move2 25s infinite alternate ease-in-out;
+}
+
+@keyframes move1 {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to { transform: translate(100px, 50px) rotate(45deg); }
+}
+
+@keyframes move2 {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to { transform: translate(-80px, -60px) rotate(-60deg); }
+}
+
+/* --- Main Layout --- */
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* --- Forecast Card --- */
+.forecast-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--color-card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.card-header h1 {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.card-header p {
+    color: var(--color-secondary);
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* --- Action Button --- */
+.action-section {
+    margin: 2rem 0;
+}
+
+.forecast-button {
+    width: 100%;
+    background-color: var(--color-text);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-button:hover {
+    background-color: var(--color-primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.forecast-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- Divider --- */
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #e5e7eb;
+    margin: 0;
+}
+
+/* --- Results --- */
+.results-section {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.results-section.hidden {
+    display: none;
+}
+
+.result-box {
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.result-box h2 {
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 0.5rem 0;
+}
+
+.weather-box {
+    background-color: #e0f2fe; /* Light blue */
+    color: #0c4a6e;
+}
+
+.weather-box #weather-display {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.fragrance-box {
+    background-color: #fefce8; /* Light yellow */
+    color: #713f12;
+}
+
+.fragrance-box .scent-notes {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin: 0;
+    color: #ca8a04; /* Gold text */
+}
+
+.fragrance-box .scent-reason {
+    margin-top: 0.75rem;
+    line-height: 1.6;
+}
+
+/* --- Loading & Error States --- */
+.loading-section, .error-box {
+    margin-top: 2rem;
+}
+
+.loading-section.hidden, .error-box.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #e5e7eb;
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.error-box {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 600px) {
+    .main-container {
+        padding: 1rem;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .forecast-card {
+        padding: 1.5rem;
     }
-}
-
-/* Apply the animation to the results section when it's not hidden */
-#results:not(.hidden) {
-    animation: fadeIn 0.5s ease-out forwards;
+    .card-header h1 {
+        font-size: 2rem;
+    }
 }
