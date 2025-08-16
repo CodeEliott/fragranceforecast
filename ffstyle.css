@@ -1,0 +1,30 @@
+/* Import Tailwind CSS base styles, components, and utilities */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom styles for the application */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.title-font {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Custom animation for fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply the animation to the results section when it's not hidden */
+#results:not(.hidden) {
+    animation: fadeIn 0.5s ease-out forwards;
+}

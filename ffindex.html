@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragrance Forecast</title>
+    
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Main container -->
+    <div class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-rose-50 to-teal-50">
+
+        <!-- Forecast Card -->
+        <div class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl p-8 space-y-6">
+            
+            <!-- Header Section -->
+            <header class="text-center">
+                <h1 class="text-4xl font-bold title-font text-gray-900">Fragrance Forecast</h1>
+                <p class="text-gray-500 mt-2">Find the perfect scent for today's weather.</p>
+            </header>
+
+            <!-- Action Section -->
+            <div class="space-y-4">
+                <button id="getForecastBtn" class="w-full bg-rose-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    Get My Fragrance Forecast
+                </button>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-gray-200"></div>
+
+            <!-- Results Section (Initially Hidden) -->
+            <div id="results" class="hidden space-y-4">
+                <!-- Location & Weather Display -->
+                <div class="bg-teal-50 p-4 rounded-lg text-center">
+                    <h2 id="location-display" class="text-lg font-bold text-teal-800">Getting your location...</h2>
+                    <p id="weather-display" class="text-2xl font-semibold text-teal-900">-</p>
+                </div>
+
+                <!-- Fragrance Recommendation -->
+                <div class="bg-rose-50 p-4 rounded-lg text-center">
+                    <h2 class="text-lg font-bold text-rose-800">Recommended Scent Profile</h2>
+                    <p id="fragrance-recommendation" class="text-2xl font-semibold text-rose-900">-</p>
+                    <p id="fragrance-reason" class="text-gray-600 mt-1">-</p>
+                </div>
+            </div>
+            
+            <!-- Loading Spinner (Initially Hidden) -->
+            <div id="loading" class="hidden flex justify-center items-center p-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-500"></div>
+                <p id="loading-message" class="ml-3 text-gray-600">Getting your forecast...</p>
+            </div>
+            
+            <!-- Error Message Box (Initially Hidden) -->
+            <div id="error-box" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative" role="alert">
+                <strong class="font-bold">Error:</strong>
+                <span id="error-message" class="block sm:inline">Something went wrong.</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Link to the JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
