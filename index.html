@@ -11,25 +11,34 @@
         /* ------------------- */
         /* Basic Setup & Reset */
         /* ------------------- */
-        *,
-        *::before,
-        *::after {
+        :root {
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+            --color-text: #333;
+            --color-border: #e0d4ff;
+            --color-box-bg: #e0e0e0;
+        }
+
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
         body {
-            font-family: 'Lato', sans-serif;
+            font-family: var(--font-body);
             background-color: #fdfdfd;
-            color: #333;
+            color: var(--color-text);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 2rem;
-            /* Creates the purple border effect */
-            border: 10px solid #e0d4ff;
+            border: 10px solid var(--color-border);
+        }
+
+        .hidden {
+            display: none !important;
         }
 
         /* ------------------- */
@@ -37,16 +46,16 @@
         /* ------------------- */
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 550px; /* Adjusted max-width */
             text-align: center;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         /* ------------------- */
         /* Typography          */
         /* ------------------- */
         .title {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-title);
             font-size: 3.5rem;
             font-weight: 700;
             color: #2c2c2c;
@@ -54,76 +63,95 @@
         }
 
         .subtitle {
-            font-family: 'Lato', sans-serif;
+            font-family: var(--font-body);
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #666;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         /* ------------------- */
-        /* Layout & Content    */
+        /* Action Button       */
         /* ------------------- */
-        .forecast-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
+        .action-section {
+            margin-bottom: 2rem;
         }
 
-        /* Column for the icons on the left */
-        .icon-column {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            gap: 5rem; /* Increased gap for better spacing */
-            height: 250px; /* Give it a fixed height to align icons */
+        .forecast-button {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            background-color: #5a5a5a;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
-        .icon {
-            width: 50px;
-            height: auto;
-            opacity: 0.7;
+        .forecast-button:hover {
+            background-color: #333;
+            transform: translateY(-2px);
         }
 
-        /* Column for the information boxes on the right */
-        .info-column {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            width: 100%;
-            max-width: 400px;
+        .forecast-button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+            transform: none;
         }
-
-        /* Styling for the textured info boxes */
+        
+        /* ------------------- */
+        /* Info & Results Boxes*/
+        /* ------------------- */
         .info-box {
-            background-color: #e0e0e0;
-            padding: 2rem;
-            min-height: 120px;
+            background-color: var(--color-box-bg);
+            padding: 1.5rem 2rem;
             text-align: left;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            /* This creates the textured, painted effect */
             background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><filter id="f"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="1"/></filter><rect width="100%" height="100%" filter="url(%23f)" opacity="0.1"/></svg>');
             border-radius: 4px;
-        }
-        
-        .info-box p {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            color: #333;
+            margin-top: 1.5rem;
         }
 
-        .info-box div {
-            font-family: 'Lato', sans-serif;
-            font-size: 1.1rem;
-            color: #111;
-            font-weight: bold;
-            margin-top: 0.5rem;
+        .info-box h2 {
+            font-family: var(--font-title);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+
+        .info-box p {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.6;
         }
         
+        #fragrance-recommendation {
+            font-weight: 700;
+            color: #000;
+        }
+
+        /* ------------------- */
+        /* Loading & Error     */
+        /* ------------------- */
+        .loading-section {
+            padding: 2rem;
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .error-box {
+            background-color: #fbe2e2;
+            color: #8b1818;
+            border: 1px solid #f5caca;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+        }
+
         /* ------------------- */
         /* Responsive Design   */
         /* ------------------- */
@@ -136,22 +164,9 @@
                 font-size: 2.5rem;
             }
             .subtitle {
-                margin-bottom: 3rem;
-            }
-            .forecast-content {
-                flex-direction: column;
-                gap: 3rem;
-            }
-            .icon-column {
-                flex-direction: row;
-                height: auto;
-                gap: 5rem;
-            }
-            .info-box {
-                text-align: center;
+                margin-bottom: 2rem;
             }
         }
-
     </style>
 </head>
 <body>
@@ -162,129 +177,261 @@
             <p class="subtitle">Get your suggested scent based on the weather</p>
         </header>
 
-        <main class="forecast-content">
-            <!-- Left column with icons -->
-            <div class="icon-column">
-                <!-- Thermometer Icon SVG -->
-                <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 13.333V4C12 4 14.667 4.667 14.667 8C14.667 11.333 12 12 12 13.333Z" fill="#888888"/>
-                    <path d="M12 13.333V4M12 4C12 4 9.333 4.667 9.333 8C9.333 11.333 12 12 12 13.333M12 4H11.333M12 13.333C13.473 13.333 14.667 14.527 14.667 16C14.667 17.473 13.473 18.667 12 18.667C10.527 18.667 9.333 17.473 9.333 16C9.333 14.527 10.527 13.333 12 13.333Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M13.333 6.667H14.667" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M13.333 9.333H14.667" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M13.333 12H14.667" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <!-- Perfume Bottle Icon SVG -->
-                <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w.org/2000/svg">
-                    <path d="M16 8.125V5.333C16 4.98 15.86 4.642 15.613 4.395C15.366 4.148 15.028 4 14.667 4H9.333C8.98 4 8.642 4.148 8.395 4.395C8.148 4.642 8 4.98 8 5.333V8.125M16 8.125H8M16 8.125C17.473 8.125 18.667 9.319 18.667 10.792V18.667C18.667 19.02 18.527 19.358 18.28 19.605C18.033 19.852 17.695 20 17.333 20H6.667C6.314 20 5.976 19.852 5.729 19.605C5.482 19.358 5.333 19.02 5.333 18.667V10.792C5.333 9.319 6.527 8.125 8 8.125" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 4V2" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+        <main>
+            <!-- Button to trigger the forecast -->
+            <div class="action-section">
+                <button id="getForecastBtn" class="forecast-button">Get My Scent</button>
             </div>
 
-            <!-- Right column with info boxes -->
-            <div class="info-column">
+            <!-- Loading State -->
+            <div id="loading" class="loading-section hidden">
+                <p id="loading-message">Getting your forecast...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-box" class="error-box hidden">
+                <p id="error-message"></p>
+            </div>
+
+            <!-- Results Display -->
+            <div id="results" class="results-section hidden">
                 <div class="info-box">
-                    <p>Current weather:</p>
-                    <div id="weather-info">Loading weather data...</div>
+                    <h2 id="location-display">Forecast for your location</h2>
+                    <p id="weather-display">Weather details...</p>
                 </div>
                 <div class="info-box">
-                    <p>Suggested scent:</p>
-                    <div id="scent-suggestion">Thinking of a scent...</div>
+                    <h2>Suggested Scent Profile</h2>
+                    <p id="fragrance-recommendation">Scent notes...</p>
+                    <p id="fragrance-reason">Mood and reason...</p>
                 </div>
             </div>
         </main>
     </div>
 
     <script>
-        // This script fetches weather data and suggests a fragrance.
-        // NOTE: You need a free API key from OpenWeatherMap for this to work.
-        // Replace 'YOUR_API_KEY' with your actual key.
-        const apiKey = 'YOUR_API_KEY'; 
+        // --- DOM Elements ---
+        const getForecastBtn = document.getElementById('getForecastBtn');
+        const resultsDiv = document.getElementById('results');
+        const loadingDiv = document.getElementById('loading');
+        const loadingMessage = document.getElementById('loading-message');
+        const errorBox = document.getElementById('error-box');
+        const errorMessage = document.getElementById('error-message');
 
-        // Get user's location
-        function getWeather() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                document.getElementById('weather-info').innerText = "Geolocation is not supported by this browser.";
-            }
+        // --- UI Update Functions ---
+        const locationDisplay = document.getElementById('location-display');
+        const weatherDisplay = document.getElementById('weather-display');
+        const fragranceRecommendation = document.getElementById('fragrance-recommendation');
+        const fragranceReason = document.getElementById('fragrance-reason');
+
+        /**
+         * Shows a loading message.
+         * @param {string} message - The message to display.
+         */
+        function showLoading(message) {
+            loadingMessage.textContent = message;
+            loadingDiv.classList.remove('hidden');
+            resultsDiv.classList.add('hidden');
+            errorBox.classList.add('hidden');
+            getForecastBtn.disabled = true;
         }
 
-        // Handle geolocation success
-        async function showPosition(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        /**
+         * Hides the loading message and enables the button.
+         */
+        function hideLoading() {
+            loadingDiv.classList.add('hidden');
+            getForecastBtn.disabled = false;
+        }
 
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+        /**
+         * Displays an error message.
+         * @param {string} message - The error message to show.
+         */
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorBox.classList.remove('hidden');
+            resultsDiv.classList.add('hidden'); // Hide results on error
+            hideLoading();
+        }
+
+        /**
+         * Updates the UI with the final forecast and fragrance data.
+         * @param {object} data - The combined weather and fragrance data.
+         */
+        function updateUI(data) {
+            locationDisplay.textContent = `Forecast for ${data.city}`;
+            weatherDisplay.textContent = `${data.weather.description}, ${data.weather.temperature}°C`;
+            fragranceRecommendation.textContent = data.fragrance.scents;
+            fragranceReason.textContent = `Mood: ${data.fragrance.mood}. ${data.fragrance.reason}`;
+            resultsDiv.classList.remove('hidden');
+        }
+
+
+        // --- API Logic ---
+
+        /**
+         * Fetches weather data from the Open-Meteo API.
+         * @param {number} latitude - The latitude.
+         * @param {number} longitude - The longitude.
+         * @returns {Promise<object>} - A promise that resolves to the weather data.
+         */
+        async function getWeatherData(latitude, longitude) {
+            const weatherApiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+            const response = await fetch(weatherApiUrl);
+            if (!response.ok) {
+                throw new Error('Could not fetch weather data.');
+            }
+            const data = await response.json();
+            return {
+                temperature: Math.round(data.current_weather.temperature),
+                description: getWeatherDescription(data.current_weather.weathercode),
+            };
+        }
+
+        /**
+         * Fetches the city name from latitude and longitude using a reverse geocoding API.
+         * @param {number} latitude
+         * @param {number} longitude
+         * @returns {Promise<string>}
+         */
+        async function getCityName(latitude, longitude) {
+            // Using a free, no-key-required reverse geocoding service
+            const geoApiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+            const response = await fetch(geoApiUrl);
+            if (!response.ok) {
+                return "your location"; // Fallback
+            }
+            const data = await response.json();
+            return data.address.city || data.address.town || "your location";
+        }
+
+
+        /**
+         * Calls the Gemini API to get a fragrance recommendation.
+         * @param {object} weatherData - The current weather data.
+         * @returns {Promise<object>} - A promise that resolves to the fragrance recommendation.
+         */
+        async function getFragranceFromAI(weatherData) {
+            const apiKey = ""; // Leave empty, will be handled by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            const prompt = `
+                Based on the following weather conditions, recommend a fragrance profile.
+                Weather: ${weatherData.description}
+                Temperature: ${weatherData.temperature}°C
+
+                Provide your response in a JSON object with the following structure:
+                {
+                  "mood": "A short description of the mood or feeling",
+                  "atmosphere": "A description of the overall atmosphere",
+                  "scents": "Key scent notes, e.g., 'Citrus & Bergamot'",
+                  "reason": "A brief explanation for the recommendation."
                 }
-                const data = await response.json();
-                displayWeather(data);
-                suggestScent(data);
-            } catch (error) {
-                console.error("Error fetching weather data:", error);
-                document.getElementById('weather-info').innerText = "Could not fetch weather data. Check API key and network.";
-            }
-        }
-        
-        // Handle geolocation errors
-        function showError(error) {
-            const weatherDiv = document.getElementById('weather-info');
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    weatherDiv.innerText = "User denied the request for Geolocation."
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    weatherDiv.innerText = "Location information is unavailable."
-                    break;
-                case error.TIMEOUT:
-                    weatherDiv.innerText = "The request to get user location timed out."
-                    break;
-                case error.UNKNOWN_ERROR:
-                    weatherDiv.innerText = "An unknown error occurred."
-                    break;
-            }
-        }
+            `;
 
-        // Display the fetched weather data
-        function displayWeather(data) {
-            if (data && data.main && data.weather) {
-                const temp = data.main.temp;
-                const description = data.weather[0].description;
-                const location = data.name;
-                document.getElementById('weather-info').innerText = `${temp}°C, ${description} in ${location}`;
-            } else {
-                 document.getElementById('weather-info').innerText = 'Weather data not available.';
-            }
-        }
-
-        // Suggest a scent based on the weather
-        function suggestScent(data) {
-            const temp = data.main.temp;
-            const weatherCondition = data.weather[0].main.toLowerCase();
-            let scent = '';
-
-            if (temp > 25) {
-                scent = 'Light & Citrusy (e.g., Bergamot, Lemon, Neroli)';
-            } else if (temp > 15 && temp <= 25) {
-                if (weatherCondition.includes('rain')) {
-                    scent = 'Fresh & Aquatic (e.g., Sea Salt, Rain Kissed Petals)';
-                } else {
-                    scent = 'Floral & Green (e.g., Jasmine, Rose, Green Tea)';
+            const payload = {
+                contents: [{
+                    parts: [{
+                        text: prompt
+                    }]
+                }],
+                generationConfig: {
+                    responseMimeType: "application/json",
                 }
-            } else if (temp > 5 && temp <= 15) {
-                 scent = 'Woody & Aromatic (e.g., Sandalwood, Cedar, Lavender)';
-            } else {
-                scent = 'Warm & Spicy (e.g., Vanilla, Amber, Cinnamon)';
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`AI API request failed with status ${response.status}`);
             }
-            
-            document.getElementById('scent-suggestion').innerText = scent;
+
+            const result = await response.json();
+            if (result.candidates && result.candidates.length > 0) {
+                const jsonText = result.candidates[0].content.parts[0].text;
+                return JSON.parse(jsonText);
+            } else {
+                throw new Error('Invalid response structure from AI API.');
+            }
         }
 
-        // Run the function on page load
-        window.onload = getWeather;
+
+        // --- Main Application Flow ---
+
+        getForecastBtn.addEventListener('click', async () => {
+            if (!navigator.geolocation) {
+                showError("Geolocation is not supported by your browser.");
+                return;
+            }
+
+            showLoading("Getting your location...");
+
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                try {
+                    const {
+                        latitude,
+                        longitude
+                    } = position.coords;
+
+                    showLoading("Fetching weather data...");
+                    const [weather, city] = await Promise.all([
+                        getWeatherData(latitude, longitude),
+                        getCityName(latitude, longitude)
+                    ]);
+
+
+                    showLoading("Creating your fragrance profile...");
+                    const fragrance = await getFragranceFromAI(weather);
+
+                    hideLoading();
+                    updateUI({
+                        weather,
+                        fragrance,
+                        city
+                    });
+
+                } catch (error) {
+                    console.error("Error:", error);
+                    showError(error.message || "An unknown error occurred.");
+                }
+            }, (error) => {
+                // Geolocation error handling
+                let message = "Could not get your location. Please allow location access.";
+                if (error.code === error.PERMISSION_DENIED) {
+                    message = "Location access was denied. Please enable it in your browser settings.";
+                }
+                showError(message);
+            });
+        });
+
+
+        // --- Helper Functions ---
+
+        /**
+         * Converts WMO weather codes to human-readable descriptions.
+         * @param {number} code - The WMO weather code.
+         * @returns {string} - The weather description.
+         */
+        function getWeatherDescription(code) {
+            const descriptions = {
+                0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
+                45: "Fog", 48: "Depositing rime fog", 51: "Light drizzle", 53: "Moderate drizzle",
+                55: "Dense drizzle", 56: "Light freezing drizzle", 57: "Dense freezing drizzle",
+                61: "Slight rain", 63: "Moderate rain", 65: "Heavy rain",
+                66: "Light freezing rain", 67: "Heavy freezing rain", 71: "Slight snow fall",
+                73: "Moderate snow fall", 75: "Heavy snow fall", 77: "Snow grains",
+                80: "Slight rain showers", 81: "Moderate rain showers", 82: "Violent rain showers",
+                85: "Slight snow showers", 86: "Heavy snow showers", 95: "Thunderstorm",
+                96: "Thunderstorm with slight hail", 99: "Thunderstorm with heavy hail",
+            };
+            return descriptions[code] || "Unknown weather";
+        }
     </script>
 </body>
 </html>
