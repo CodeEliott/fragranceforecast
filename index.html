@@ -4,77 +4,287 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fragrance Forecast</title>
-    
-    <!-- Link to the new CSS file -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ------------------- */
+        /* Basic Setup & Reset */
+        /* ------------------- */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #fdfdfd;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            /* Creates the purple border effect */
+            border: 10px solid #e0d4ff;
+        }
+
+        /* ------------------- */
+        /* Main Container      */
+        /* ------------------- */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* ------------------- */
+        /* Typography          */
+        /* ------------------- */
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin-bottom: 4rem;
+        }
+
+        /* ------------------- */
+        /* Layout & Content    */
+        /* ------------------- */
+        .forecast-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Column for the icons on the left */
+        .icon-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            gap: 5rem; /* Increased gap for better spacing */
+            height: 250px; /* Give it a fixed height to align icons */
+        }
+
+        .icon {
+            width: 50px;
+            height: auto;
+            opacity: 0.7;
+        }
+
+        /* Column for the information boxes on the right */
+        .info-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Styling for the textured info boxes */
+        .info-box {
+            background-color: #e0e0e0;
+            padding: 2rem;
+            min-height: 120px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* This creates the textured, painted effect */
+            background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><filter id="f"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="1"/></filter><rect width="100%" height="100%" filter="url(%23f)" opacity="0.1"/></svg>');
+            border-radius: 4px;
+        }
+        
+        .info-box p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: #333;
+        }
+
+        .info-box div {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1rem;
+            color: #111;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+        
+        /* ------------------- */
+        /* Responsive Design   */
+        /* ------------------- */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                border-width: 5px;
+            }
+            .title {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                margin-bottom: 3rem;
+            }
+            .forecast-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+            .icon-column {
+                flex-direction: row;
+                height: auto;
+                gap: 5rem;
+            }
+            .info-box {
+                text-align: center;
+            }
+        }
+
+    </style>
 </head>
 <body>
 
-    <!-- Background decorative shapes -->
-    <div class="background-shapes">
-        <div class="shape shape1"></div>
-        <div class="shape shape2"></div>
+    <div class="container">
+        <header>
+            <h1 class="title">Fragrance Forecast</h1>
+            <p class="subtitle">Get your suggested scent based on the weather</p>
+        </header>
+
+        <main class="forecast-content">
+            <!-- Left column with icons -->
+            <div class="icon-column">
+                <!-- Thermometer Icon SVG -->
+                <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 13.333V4C12 4 14.667 4.667 14.667 8C14.667 11.333 12 12 12 13.333Z" fill="#888888"/>
+                    <path d="M12 13.333V4M12 4C12 4 9.333 4.667 9.333 8C9.333 11.333 12 12 12 13.333M12 4H11.333M12 13.333C13.473 13.333 14.667 14.527 14.667 16C14.667 17.473 13.473 18.667 12 18.667C10.527 18.667 9.333 17.473 9.333 16C9.333 14.527 10.527 13.333 12 13.333Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.333 6.667H14.667" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M13.333 9.333H14.667" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M13.333 12H14.667" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <!-- Perfume Bottle Icon SVG -->
+                <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w.org/2000/svg">
+                    <path d="M16 8.125V5.333C16 4.98 15.86 4.642 15.613 4.395C15.366 4.148 15.028 4 14.667 4H9.333C8.98 4 8.642 4.148 8.395 4.395C8.148 4.642 8 4.98 8 5.333V8.125M16 8.125H8M16 8.125C17.473 8.125 18.667 9.319 18.667 10.792V18.667C18.667 19.02 18.527 19.358 18.28 19.605C18.033 19.852 17.695 20 17.333 20H6.667C6.314 20 5.976 19.852 5.729 19.605C5.482 19.358 5.333 19.02 5.333 18.667V10.792C5.333 9.319 6.527 8.125 8 8.125" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 4V2" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <!-- Right column with info boxes -->
+            <div class="info-column">
+                <div class="info-box">
+                    <p>Current weather:</p>
+                    <div id="weather-info">Loading weather data...</div>
+                </div>
+                <div class="info-box">
+                    <p>Suggested scent:</p>
+                    <div id="scent-suggestion">Thinking of a scent...</div>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <!-- Main container -->
-    <main class="main-container">
+    <script>
+        // This script fetches weather data and suggests a fragrance.
+        // NOTE: You need a free API key from OpenWeatherMap for this to work.
+        // Replace 'YOUR_API_KEY' with your actual key.
+        const apiKey = 'YOUR_API_KEY'; 
 
-        <!-- Forecast Card -->
-        <div class="forecast-card">
+        // Get user's location
+        function getWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                document.getElementById('weather-info').innerText = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        // Handle geolocation success
+        async function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                displayWeather(data);
+                suggestScent(data);
+            } catch (error) {
+                console.error("Error fetching weather data:", error);
+                document.getElementById('weather-info').innerText = "Could not fetch weather data. Check API key and network.";
+            }
+        }
+        
+        // Handle geolocation errors
+        function showError(error) {
+            const weatherDiv = document.getElementById('weather-info');
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    weatherDiv.innerText = "User denied the request for Geolocation."
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    weatherDiv.innerText = "Location information is unavailable."
+                    break;
+                case error.TIMEOUT:
+                    weatherDiv.innerText = "The request to get user location timed out."
+                    break;
+                case error.UNKNOWN_ERROR:
+                    weatherDiv.innerText = "An unknown error occurred."
+                    break;
+            }
+        }
+
+        // Display the fetched weather data
+        function displayWeather(data) {
+            if (data && data.main && data.weather) {
+                const temp = data.main.temp;
+                const description = data.weather[0].description;
+                const location = data.name;
+                document.getElementById('weather-info').innerText = `${temp}°C, ${description} in ${location}`;
+            } else {
+                 document.getElementById('weather-info').innerText = 'Weather data not available.';
+            }
+        }
+
+        // Suggest a scent based on the weather
+        function suggestScent(data) {
+            const temp = data.main.temp;
+            const weatherCondition = data.weather[0].main.toLowerCase();
+            let scent = '';
+
+            if (temp > 25) {
+                scent = 'Light & Citrusy (e.g., Bergamot, Lemon, Neroli)';
+            } else if (temp > 15 && temp <= 25) {
+                if (weatherCondition.includes('rain')) {
+                    scent = 'Fresh & Aquatic (e.g., Sea Salt, Rain Kissed Petals)';
+                } else {
+                    scent = 'Floral & Green (e.g., Jasmine, Rose, Green Tea)';
+                }
+            } else if (temp > 5 && temp <= 15) {
+                 scent = 'Woody & Aromatic (e.g., Sandalwood, Cedar, Lavender)';
+            } else {
+                scent = 'Warm & Spicy (e.g., Vanilla, Amber, Cinnamon)';
+            }
             
-            <!-- Header Section -->
-            <header class="card-header">
-                <h1 class="title-font">Fragrance Forecast</h1>
-                <p>Discover the perfect scent for today's atmosphere.</p>
-            </header>
+            document.getElementById('scent-suggestion').innerText = scent;
+        }
 
-            <!-- Action Section -->
-            <div class="action-section">
-                <button id="getForecastBtn" class="forecast-button">
-                    Get My Fragrance Forecast
-                </button>
-            </div>
-
-            <!-- Divider -->
-            <hr class="divider" />
-
-            <!-- Results Section (Initially Hidden) -->
-            <div id="results" class="results-section hidden">
-                <!-- Location & Weather Display -->
-                <div class="result-box weather-box">
-                    <h2 id="location-display">Forecast for...</h2>
-                    <p id="weather-display">-</p>
-                </div>
-
-                <!-- Fragrance Recommendation -->
-                <div class="result-box fragrance-box">
-                    <h2>Recommended Scent Profile</h2>
-                    <p id="fragrance-recommendation" class="scent-notes">-</p>
-                    <p id="fragrance-reason" class="scent-reason">-</p>
-                </div>
-            </div>
-            
-            <!-- Loading Spinner (Initially Hidden) -->
-            <div id="loading" class="loading-section hidden">
-                <div class="spinner"></div>
-                <p id="loading-message">Getting your forecast...</p>
-            </div>
-            
-            <!-- Error Message Box (Initially Hidden) -->
-            <div id="error-box" class="error-box hidden" role="alert">
-                <strong class="font-bold">Error:</strong>
-                <span id="error-message">Something went wrong.</span>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- Link to the JavaScript file -->
-    <script src="script.js"></script>
+        // Run the function on page load
+        window.onload = getWeather;
+    </script>
 </body>
 </html>
